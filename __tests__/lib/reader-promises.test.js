@@ -2,18 +2,17 @@
 
 jest.mock('fs');
 
-const reader = require('../../lib/reader-fixed.js');
+const reader = require('../../lib/reader-promises.js');
 
 describe('File Reader Module', () => {
 
-  it('when given a bad file, returns an error', done => {
+  it('when given a bad file, returns an error', () => {
     let files = ['bad.txt'];
     // In jest, throwing errors obviously kills the app, so if you're
     // going to throw one in a test, have the expect execute your code as a
     // function so that you can trap it.
-    reader(files, (err,data) => {
+    return reader(files, (err,data) => {
       expect(err).toBeDefined();
-      done();
     });
   });
 
